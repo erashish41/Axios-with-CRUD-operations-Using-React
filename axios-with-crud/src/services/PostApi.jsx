@@ -5,6 +5,11 @@ const api = axios.create({
 });
 
 // get Method
-export const getPost = () =>{
+export const getPost = () => {
     return api.get("/posts");
+}
+
+// delete method
+export const deletePost = (id) => {
+    return api.delete(`/posts/${id}`)
 }

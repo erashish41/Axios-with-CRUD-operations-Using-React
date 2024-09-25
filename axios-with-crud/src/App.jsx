@@ -4,7 +4,10 @@ import "./App.css"
 const APP = () => {
 
   return (
-    <Post />
+    <section className="main-section">
+      <Post />
+    </section>
+    
   )
 }
 export default APP;

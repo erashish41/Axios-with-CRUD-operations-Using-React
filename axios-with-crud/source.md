@@ -12,7 +12,7 @@ import axios from "axios";
 const api = axios.create({
     baseURL: "https://jsonplaceholder.typicode.com"
 });
-// get Method
+// by using "get" Method
 export const getMethod = () =>{
     return api.get("/posts");
 }
