@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { deletePost, getPost } from "../services/PostApi";
+import { Form } from "./Form";
 
 export const Post = () => {
 
@@ -33,7 +34,12 @@ export const Post = () => {
         }
     }
 
-    return <section className="section-post">
+    return (
+        <>
+            <section className="section-form">
+                <Form data={data} setData={setData}/>
+            </section>
+            <section className="section-post">
             <ol>
                 {data.map((currEl) =>{
                         const {id, body, title} = currEl
@@ -48,5 +54,6 @@ export const Post = () => {
                     })
                 }
             </ol>
-    </section>
-}
+        </section>
+    </>
+)}
