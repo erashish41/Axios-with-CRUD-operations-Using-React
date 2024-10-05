@@ -7,7 +7,7 @@ export const Post = () => {
 
     const getPostData = async () => {
         const res = await getPost();
-        console.log(res.data);
+        // console.log(res.data);
         setData(res.data);
     }
     
@@ -18,14 +18,16 @@ export const Post = () => {
     const handleDeletePost = async(id) => {
         try {
             const res = await deletePost(id);
-            // console.log(res);
+            console.log(res);
             if(res.status === 200){
                 const newUpdatedPost = data.filter((currPost) => {
                     return currPost.id !== id
                 })
                 setData(newUpdatedPost) 
+            }else{
+                console.log("fail to delete the post ", res.status);
+                
             }
-            
         } catch (error) {
             console.log(error);
         }
