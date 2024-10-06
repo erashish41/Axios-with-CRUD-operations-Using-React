@@ -27,7 +27,6 @@ export const Post = () => {
                 setData(newUpdatedPost) 
             }else{
                 console.log("fail to delete the post ", res.status);
-                
             }
         } catch (error) {
             console.log(error);
@@ -37,12 +36,12 @@ export const Post = () => {
     return (
         <>
             <section className="section-form">
-                <Form data={data} setData={setData}/>
+                <Form data={data} setData={setData}/>   
             </section>
             <section className="section-post">
             <ol>
                 {data.map((currEl) =>{
-                        const {id, body, title} = currEl
+                    const {id, body, title} = currEl
                             return <li key={id}>
                                 <p>{title}</p>
                                 <p>{body}</p>
@@ -51,7 +50,8 @@ export const Post = () => {
                                     className="btn-delete"
                                     onClick={()=> handleDeletePost(id)}>Delete</button>
                             </li>
-                    })
+                        }
+                    )
                 }
             </ol>
         </section>
