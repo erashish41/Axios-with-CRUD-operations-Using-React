@@ -8,6 +8,8 @@ export const Form = ({data, setData, updateDataApi, setUpdateDataApi}) => {
         body: ""
     })
 
+    let isEmpty = Object.keys(updateDataApi).length === 0
+
     useEffect(() => {
         updateDataApi && 
         setAddData({
@@ -35,12 +37,36 @@ export const Form = ({data, setData, updateDataApi, setUpdateDataApi}) => {
            if(res.status === 201){
             setData([...data, res.data])
             setAddData({title:"", body:""})
-           }
+            setUpdateDataApi({})
+        }
+    }
+
+    const updatePostData = async () => {
+       try {
+        const res = await putData(updateDataApi.id, addData);
+        console.log(res);
+        if(res.status === 200){
+        setData((prev) => {
+            return prev.map((currElm) => {
+                return currElm.id === updateDataApi.id ? res.data : currElm;
+            })
+        })
+
+            setAddData({title: "",body: ""})
+        }
+        }catch (error) {
+            console.log(error);
+       }
     }
 
     const handleFormSubmit = (e) => {
         e.preventDefault();
-        addPostData()
+        const action = e.nativeEvent.submitter.value;
+        if(action === "Add"){
+            addPostData();
+        }else if(action === "Edit"){
+            updatePostData();
+        }
     }
 
     return (
@@ -69,7 +95,12 @@ export const Form = ({data, setData, updateDataApi, setUpdateDataApi}) => {
                     onChange={handleInputChange}></input>
             </div>
 
-            <button type="submit">Add</button>
+            <button 
+                type="submit"
+                value={isEmpty ? "Add" : "Edit"}
+                >
+                    {isEmpty ? "Add" : "Edit" }
+                </button>
         </form>
     )
 }
